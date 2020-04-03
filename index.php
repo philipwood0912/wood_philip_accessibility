@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/V Accessibility</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link rel="stylesheet" href="public/css/main.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <main id="app">
+        <header>
+            <div id="head">
+                <img src="public/images/roku_logo.svg" alt="logo">
+                <h1>Audio / Video Accessibility</h1>
+            </div>
+        </header>
+        <router-view></router-view>
+        <footer> 
+            <div id="copyright"> Copyright <?php echo date('Y'); ?> </div>
+        </footer>
+    </main>
+    <script defer src="public/js/main.js" type="module"></script>
+</body>
+</html>
