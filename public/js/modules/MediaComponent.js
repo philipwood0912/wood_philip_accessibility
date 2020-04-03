@@ -7,6 +7,7 @@ export default {
                 <video @canplay="video($event)" id="vidsource" width="480">
                 <source :src="'public/media/' + this.$parent.media.srcone" type="video/webm">
                 <source :src="'public/media/' + this.$parent.media.srctwo" type="video/mp4">
+                Sorry this doesn't seem to work in the current browser...
                 <track id="captions" label="English" kind="subtitles" srclang="en" :src="'public/text/' + this.$parent.media.text">
                 <track id="captions" label="French" kind="subtitles" srclang="fr" :src="'public/text/' + this.$parent.media.french">
                 </video>
@@ -57,6 +58,7 @@ export default {
         }
     },
     computed:{
+        // computer funct for changes in duration
         changes : {
             get : function(){
                 return this.duration;
@@ -71,6 +73,7 @@ export default {
                 }
             }
         },
+        //computed function for changes in volume
         volumeChange : {
             get: function() {
                 return this.vols
@@ -79,6 +82,7 @@ export default {
                 this.vols = v;
             }
         },
+        // computed funct for change in time
         timeChange : {
             get: function() {
                 return this.time;
@@ -97,41 +101,53 @@ export default {
         }
     },
     methods: {
+        // grab video player
         video(event){
             this.vidsource = event.target;
         },
+        //play audio files on hover
+        // took audio from dictionary
         audio(str, int){
             let url = `https://ssl.gstatic.com/dictionary/static/sounds/20180430/${str}--_us_${int}.mp3`;
             let audio = new Audio(url);
             audio.play();
             debugger;
         },
+        //volume show
         volume(){
             this.chngvol = !this.chngvol;
         },
+        //change volume using computed funct
         changeVol(){
             let vol = vols / 100;
             this.vidsource.volume = vol;
             this.volumeChange = vols;
             debugger;
         },
+        // show caption choices
         caption() {
             this.chngcap = !this.chngcap;
         },
+        // enable captions
         captions(int){
             let caption = this.vidsource.textTracks[int];
             if(caption.mode == 'disabled'){
+                // loop through captions n disable
                 for(var i=0; i < this.vidsource.textTracks.length; i++){
                     this.vidsource.textTracks[i].mode = 'disabled';
                 }
+                // enable one that is clicked
                 caption.mode = 'showing';
                 this.chngcap = !this.chngcap;
             } else {
+                // else disable it if clicked
                 caption.mode = 'disabled';
                 this.chngcap = !this.chngcap;
             }
             debugger;
         },
+        // progress bar funct using computer funct for dynamic rending
+        // use of intervals to update every second
         progress(el){        
             if(el.playing){
                 el.intervalid = setInterval(function(){
@@ -145,11 +161,13 @@ export default {
                 clearInterval(el.intervalid);
             }
         },
+        // go back function - back to homeee
         goBack(){
             this.$parent.choice = false;
             this.$parent.media = {};
             this.$router.back();
         },
+        // play button function
         play(){
             this.playing = !this.playing;
             if(this.playing){
@@ -159,11 +177,13 @@ export default {
                 this.vidsource.play();
             }
         },
+        //pause function 
         pause(){
             this.playing = !this.playing;
             this.progress(this);
             this.vidsource.pause();
         },
+        // backward function
         back(bar){
             bar.style.width -= this.durationInterval * this.duration + 'px';
             this.duration -= 5;
@@ -173,9 +193,11 @@ export default {
                 bar.style.width = 0 + 'px';
                 this.duration = 0;
                 this.vidsource.currentTime = 0;
+                this.minutes = 0;
                 this.time = 0;
             }
         },
+        //forward function
         forward(bar){
             if(this.duration < this.maxduration){
                 bar.style.width += this.durationInterval * this.duration + 'px';
@@ -187,6 +209,7 @@ export default {
                 this.duration = 0;
                 bar.style.width = 0 + 'px';
                 this.vidsource.currentTime = 0;
+                this.minutes = 0;
                 this.time = 0;
             }
         }
