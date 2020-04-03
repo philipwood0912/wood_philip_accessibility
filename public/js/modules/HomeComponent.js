@@ -8,6 +8,7 @@ export default {
     `,
     data: function() {
         return {
+            // media objects
             media: {
                 movie: {
                     title: "Movies",
@@ -41,11 +42,13 @@ export default {
         }
     },
     methods: {
+        //function to add chosen media to parent obj and push to page
         getMedia(obj) {
             this.$parent.choice = true;
             this.$parent.media = obj;
             this.$router.push({path:`/media/${obj.type}`});
         },
+        // link animation - color / border change
         linkAni(event){
             let link = event.currentTarget;
             this.animat = !this.animat;
@@ -57,11 +60,11 @@ export default {
                 link.style.borderBottom = "5px solid #6C3C97";
             }
         },
+        // audio function for home page - issues with chrome autoplay on page start
+        // page must be clicked first to hear sounds.. most of the time..
         audio(str){
             let url = `https://ssl.gstatic.com/dictionary/static/sounds/20180430/${str}--_us_1.mp3`
             let audio = new Audio(url);
-            audio.volume = 0;
-            audio.volume = 1;
             audio.play();
             debugger;
         }
