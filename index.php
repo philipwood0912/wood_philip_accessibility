@@ -12,12 +12,16 @@
 <body>
     <main id="app">
         <header>
-            <img src="public/images/roku_logo.svg" alt="logo">
-            <h1>Audio / Video Accessibility</h1>
+            <div id="head">
+                <img src="public/images/roku_logo.svg" alt="logo">
+                <h1>Audio / Video Accessibility</h1>
+            </div>
         </header>
-        <div></div>
+        <router-view></router-view>
+        <footer> 
+            <div id="copyright"> Copyright <?php echo date('Y'); ?> </div>
+        </footer>
     </main>
-    <router-view></router-view>
-    <script src="public/js/main.js" type="module"></script>
+    <script defer src="public/js/main.js" type="module"></script>
 </body>
 </html>
