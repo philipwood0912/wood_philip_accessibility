@@ -1,7 +1,8 @@
 # Audio / Video Accessibility
 ## Roku Flashback
 
-Chat Application built using socket.io, node.js and vue for the the front-end framework.
+Audio / Video accessibility research assignment for Roku Flashback application.
+Design / Development documentation can be found <a href="https://drive.google.com/open?id=1SpGephKs8e0tHn8eCHypKJ6g6a-ilbbf">here</a>.
  
 ## Getting Started
 
